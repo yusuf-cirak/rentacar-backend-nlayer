@@ -32,9 +32,12 @@ namespace DataAccess.EntityFramework
             }
         }
 
-        public List<Car> Get(Expression<Func<Car, bool>> filter)
+        public Car Get(Expression<Func<Car, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (CarDbContext context=new CarDbContext())
+            {
+                return context.Set<Car>().SingleOrDefault(filter);
+            }
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)

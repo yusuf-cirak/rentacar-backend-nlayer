@@ -33,9 +33,13 @@ namespace DataAccess.EntityFramework
             }
         }
 
-        public List<Brand> Get(Expression<Func<Brand, bool>> filter)
+        public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (CarDbContext context=new CarDbContext())
+            {
+                return context.Set<Brand>().SingleOrDefault(filter);
+            }
+            
         }
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)

@@ -32,9 +32,12 @@ namespace DataAccess.EntityFramework
             }
         }
 
-        public List<Color> Get(Expression<Func<Color, bool>> filter)
+        public Color Get(Expression<Func<Color, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (CarDbContext context = new CarDbContext())
+            {
+                return context.Set<Color>().SingleOrDefault(filter);
+            }
         }
 
         public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
