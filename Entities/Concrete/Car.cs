@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-   public class Car:IEntity
+    public class Car:IEntity
     {
         public int CarId { get; set; }
         public int CarBrandId { get; set; }
