@@ -11,5 +11,6 @@ namespace Business.Abstract
     {
         List<Brand> GetAll();
         List<Brand> GetBrandById(int brandId);
+
     }
 }

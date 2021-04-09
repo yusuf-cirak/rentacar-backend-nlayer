@@ -15,5 +15,8 @@ namespace Business.Abstract
         List<Car> GetCarsByDailyPrice(decimal min, decimal max);
         List<Car> GetAll();
         List<ProductDetailDto> GetAllDetails();
+        void Add(Car car);
+        void Update(Car car);
+        void Delete(Car car);
     }
 }
