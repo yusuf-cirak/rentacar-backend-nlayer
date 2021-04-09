@@ -16,7 +16,11 @@ namespace DataAccess.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)MSSQLLocalDB;Database=DatabaseForHomework,Trusted_Connection=True");
+            optionsBuilder.UseSqlServer(
+            @"Server=(localdb)\mssqllocaldb;Database=DatabaseForHomework;Trusted_Connection=True");
+            
+
+
         }
 
         
