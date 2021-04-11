@@ -1,24 +1,15 @@
-﻿create table Cars(
-CarId int primary key not null,
-CarName varchar(255) not null,
-CarBrandId int  not null,
-CarColorId int not null,
-CarModelYear int not null,
-CarDailyPrice decimal not null,
-CarDescription varchar(255) not null,
-
+﻿CREATE TABLE [dbo].[Users]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [FirstName] VARCHAR(50) NOT NULL, 
+    [LastName] VARCHAR(50) NOT NULL, 
+    [E-mail] VARCHAR(50) NOT NULL, 
+    [Password] INT NOT NULL
 )
 
-create table Brands(
-BrandId int primary key not null,
-BrandName varchar(255) not null,
+CREATE TABLE [dbo].[Customers]
+(
+	[UserId] INT NOT NULL PRIMARY KEY, 
+    [CompanyName] NVARCHAR(50) NOT NULL, 
+    CONSTRAINT [IdBaglanti] FOREIGN KEY ([UserId]) REFERENCES [Users]([Id]) -- İlişkilendirme
 )
-
-create table Colors(
-ColorId int primary key not null,
-ColorName varchar(255) not null,
-)
-
-
-
-
