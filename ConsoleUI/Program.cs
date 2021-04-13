@@ -14,7 +14,7 @@ namespace ConsoleUI
 
             // CustomerAdd();
 
-            // RentAdd();
+            RentAdd();
 
 
         }
@@ -22,8 +22,13 @@ namespace ConsoleUI
         private static void RentAdd()
         {
             RentalsManager rentalsManager = new RentalsManager(new EfRentalsDal());
-            var resultAdd = rentalsManager.Add(new Rentals { Id = 3, CarId = 3, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = null });
+            var resultAdd = rentalsManager.Add(new Rentals {CarId = 3, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = null });
             Console.WriteLine(resultAdd.Message);
+            foreach (var rentals in rentalsManager.GetAll().Data)
+            {
+                Console.WriteLine(rentals.CarId);
+                Console.ReadLine();
+            }
         }
 
         private static void CustomerAdd()

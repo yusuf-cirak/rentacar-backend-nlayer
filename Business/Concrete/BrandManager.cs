@@ -24,7 +24,7 @@ namespace Business.Concrete
         {
             if (DateTime.Now.Hour>20)
             {
-                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<Brand>>(_brandDal.GetAll(),Messages.MaintenanceTime);
             }
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
         }
