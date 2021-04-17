@@ -16,6 +16,7 @@ namespace DataAccess.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rentals> Rentals { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
