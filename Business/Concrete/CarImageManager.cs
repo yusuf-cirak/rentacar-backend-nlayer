@@ -19,10 +19,10 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImageDal _carImage;
+        ICarImageDal _carImageDal;
         public CarImageManager(ICarImageDal imageDal)
         {
-            _carImage = imageDal;
+            _carImageDal = imageDal;
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
@@ -41,47 +41,47 @@ namespace Business.Concrete
             }
             carImage.ImagePath = imageResult.Message;
             carImage.Date = DateTime.Now;
-            _carImage.Add(carImage);
+            _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
-            var image = _carImage.Get(c => c.Id == carImage.Id);
+            var image = _carImageDal.Get(c => c.Id == carImage.Id);
             if (image == null)
             {
                 return new ErrorResult(Messages.CarImageNotFound);
             }
 
             FileHelper.Delete(image.ImagePath);
-            _carImage.Delete(carImage);
+            _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<CarImage> Get(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImage.Get(p => p.Id == id));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == id));
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetAll()
         {
-            return new SuccessDataResult<List<CarImage>>(_carImage.GetAll().ToList());
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll().ToList());
         }
 
         public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
 
-            return new SuccessDataResult<List<CarImage>>(_carImage.GetAll(ci=>ci.CarId==id));
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(ci=>ci.CarId==id));
         }
 
 
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            var isImage = _carImage.Get(c => c.Id == carImage.Id);
+            var isImage = _carImageDal.Get(c => c.Id == carImage.Id);
             if (isImage == null)
             {
                 return new ErrorResult(Messages.CarImageNotFound);
@@ -93,7 +93,7 @@ namespace Business.Concrete
                 return new ErrorResult(updatedFile.Message);
             }
             carImage.ImagePath = updatedFile.Message;
-            _carImage.Update(carImage);
+            _carImageDal.Update(carImage);
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
@@ -103,7 +103,7 @@ namespace Business.Concrete
             try
             {
                 string path = @"\images\default.jpg";
-                var result = _carImage.GetAll(c => c.CarId == id).Count;
+                var result = _carImageDal.GetAll(c => c.CarId == id).Count;
                 if (result >= 1)
                 {
                     List<CarImage> carImage = new List<CarImage>();
@@ -117,7 +117,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<CarImage>>(exception.Message);
             }
 
-            return new SuccessDataResult<List<CarImage>>(_carImage.GetAll(p => p.CarId == id).ToList());
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(p => p.CarId == id).ToList());
         }
 
         private IResult CarImageDelete(CarImage carImage)
@@ -137,7 +137,7 @@ namespace Business.Concrete
 
         private IResult CheckImageLimitExceeded(int carId)
         {
-            var carImageCount = _carImage.GetAll(p => p.CarId == carId).Count;
+            var carImageCount = _carImageDal.GetAll(p => p.CarId == carId).Count;
             if (carImageCount >= 5)
             {
                 return new ErrorResult(Messages.CarImagesExceded);

@@ -14,7 +14,7 @@ namespace ConsoleUI
 
             // CustomerAdd();
 
-            RentAdd();
+            // RentAdd();
 
 
         }
@@ -42,12 +42,5 @@ namespace ConsoleUI
             //}
         }
 
-        private static void UserAdd()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            var resultAdd = userManager.Add(new User { Id = 5, Email = "yusuf10901@hotmail.com", Password = 1234, FirstName = "Yusuf", LastName = "Çırak" });
-            var resultAdd2 = userManager.Add(new User { Id = 6, Email = "yusuf10902@hotmail.com", Password = 12345, FirstName = "Yusuff", LastName = "Çırakk" });
-            Console.WriteLine(resultAdd.Message);
-        }
     }
 }
