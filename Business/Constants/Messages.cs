@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,5 +35,12 @@ namespace Business.Constants
         public static string CarImagesExceded = "Bir araç için maksimum 5 resim yükleyebilirsiniz";
         public static string CarImageNotFound = "Böyle bir resim bulunamadı";
         public static string CarImageUpdated = "Araç resmi güncellendi";
+        public static string AuthorizationDenied = "Yetkiniz bulunmamakta";
+        public static string UserRegistered = "Başarıyla kayıt oldunuz";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Parolanız hatalı";
+        public static string SuccessfulLogin = "Başarıyla giriş yapıldı";
+        public static string UserAlreadyExists = "Kullanıcı adı zaten kullanılmakta";
+        public static string AccessTokenCreated = "Token oluşturuldu";
     }
 }
