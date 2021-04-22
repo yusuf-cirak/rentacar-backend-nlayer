@@ -2,6 +2,9 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -25,14 +28,28 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("Car.Add.Auth")]
+        [SecuredOperation("car.add.auth")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("cars.getall")]// Yeni ürün eklendiğinde cache siliniyor yani önceden getall işlemini cache'den yaparken
+        // yeni bir ürün eklemesi yapıldıktan sonra getall işleminin bile tekrardan cache'ye eklenmesi gerekir.
         public IResult Add(Car car)
         {
 
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
 
+        }
+        
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if (car.CarDailyPrice<160000)
+            {
+                throw new Exception("Transactional Test");
+            }
+            Add(car);
+            return null;
         }
 
         public IResult Delete(Car car)
@@ -45,6 +62,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(1)]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour==06)
