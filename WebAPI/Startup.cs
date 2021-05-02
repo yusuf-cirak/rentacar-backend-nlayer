@@ -60,6 +60,7 @@ namespace WebAPI
             //services.AddSingleton<IUserService, UserManager>();
             //services.AddSingleton<IUserDal, EfUserDal>();
             // services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();  (15. günde silindi ve CoreModule'a taþýndý.)
+            services.AddCors();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -96,6 +97,7 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200/").AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -60,6 +61,7 @@ namespace WebAPI.Controllers
 
         public IActionResult GetAll()
         {
+            Thread.Sleep(3);
             var result = _rentalService.GetAll();
             if (result.Success)
             {
@@ -68,11 +70,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("GetByBrandName")]
 
-        public IActionResult GetById(int rentId)
+        public IActionResult GetByBrandName(int brandName)
         {
-            var result = _rentalService.GetById(rentId);
+            var result = _rentalService.GetByBrandName(brandName);
             if (result.Success)
             {
                 return Ok(result);

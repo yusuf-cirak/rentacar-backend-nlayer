@@ -1,6 +1,5 @@
 ﻿using Business.Concrete;
 using DataAccess.EntityFramework;
-using DataAccess.InMemoryConcrete;
 using Entities.Concrete;
 using System;
 
@@ -15,18 +14,16 @@ namespace ConsoleUI
             // CustomerAdd();
 
             // RentAdd();
-
-
         }
 
         private static void RentAdd()
         {
             RentalsManager rentalsManager = new RentalsManager(new EfRentalsDal());
-            var resultAdd = rentalsManager.Add(new Rentals {CarId = 3, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = null });
+            var resultAdd = rentalsManager.Add(new Rentals {BrandName = 3, FirstName = "Ad",LastName="Soyad", RentDate = DateTime.Now, ReturnDate = null });
             Console.WriteLine(resultAdd.Message);
             foreach (var rentals in rentalsManager.GetAll().Data)
             {
-                Console.WriteLine(rentals.CarId);
+                Console.WriteLine(rentals.BrandName);
                 Console.ReadLine();
             }
         }
