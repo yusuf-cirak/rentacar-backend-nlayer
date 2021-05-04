@@ -73,29 +73,29 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
         }
 
-        public IDataResult<List<CarDetailDto>> GetAllCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails(int carId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.DetailsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c=>c.CarId==carId), Messages.DetailsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(b => b.BrandId == brandId), Messages.DetailsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(b => b.CarBrandId == brandId), Messages.DetailsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandName(string brandName)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(b=>b.BrandName==brandName), Messages.DetailsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(b=>b.CarBrandName==brandName), Messages.DetailsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId), Messages.DetailsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.CarColorId == colorId), Messages.DetailsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByColorName(string colorName)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(b => b.ColorName == colorName), Messages.DetailsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(b => b.CarColorName == colorName), Messages.DetailsListed);
         }
 
         public IDataResult<Car> GetCarsByDailyPrice(decimal min, decimal max)

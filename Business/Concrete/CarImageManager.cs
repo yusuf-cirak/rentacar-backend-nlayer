@@ -71,10 +71,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll().ToList());
         }
 
-        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
+        public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
 
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(ci=>ci.CarId==id));
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(ci=>ci.CarId== carId),Messages.CarImageListed);
         }
 
 

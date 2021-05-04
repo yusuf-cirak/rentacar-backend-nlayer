@@ -20,19 +20,21 @@ namespace DataAccess.EntityFramework
             using (CarDbContext context = new CarDbContext())
             {
                 var result = from c in context.Cars
-                             join b in context.Brands on c.CarBrandName equals b.BrandName
-                             join co in context.Colors on c.CarColorName equals co.ColorName
                              join br in context.Brands on c.CarBrandId equals br.BrandId
                              join col in context.Colors on c.CarColorId equals col.ColorId
                              select new CarDetailDto
                              {
-                                 CarId=c.CarId,
-                                 BrandId=br.BrandId,
-                                 ColorId=col.ColorId,
-                                 BrandName = b.BrandName,
+                                 CarId = c.CarId,
                                  CarName = c.CarName,
-                                 ColorName = co.ColorName,
-                                 DailyPrice = c.CarDailyPrice,
+                                 CarBrandName = br.BrandName,
+                                 CarColorName = col.ColorName,
+                                 CarModelYear=c.CarModelYear,
+                                 CarDailyPrice = c.CarDailyPrice,
+                                 CarDescription= c.CarDescription,
+                                 CarBrandId = br.BrandId,
+                                 CarColorId = col.ColorId,
+
+
                                  CarImage = (from i in context.CarImages
                                             where (c.CarId == i.CarId)
                                              select new CarImage { CarId = i.CarId, Date = i.Date, Id = i.Id, ImagePath = i.ImagePath }).ToList()
