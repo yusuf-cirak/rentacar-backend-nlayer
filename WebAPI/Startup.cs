@@ -99,10 +99,12 @@ namespace WebAPI
             }
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200/").AllowAnyOrigin());
 
+            app.UseStaticFiles(); // Resim görüntülemek için
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+    
             app.UseAuthentication(); // Bir sisteme önce giriþ yapýlýr.
 
             app.UseAuthorization();  // Sonra ise yetkiler kullanýlýr. Sýralama önemlidir.

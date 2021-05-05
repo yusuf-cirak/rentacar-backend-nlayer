@@ -22,7 +22,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            if (DateTime.Now.Hour>20)
+            if (DateTime.Now.Hour==06)
             {
                 return new ErrorDataResult<List<Color>>(_colorDal.GetAll(),Messages.MaintenanceTime);
             }
