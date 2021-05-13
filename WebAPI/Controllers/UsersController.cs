@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet("Add")]
+        [HttpPost("Add")]
 
         public IActionResult Add(User user)
         {
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Update")]
+        [HttpPost("Update")]
 
         public IActionResult Update(User user)
         {
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Delete")]
+        [HttpPost("Delete")]
 
         public IActionResult Delete(User user)
         {

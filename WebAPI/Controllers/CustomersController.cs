@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
             _customerService = customerService;
         }
 
-       [HttpGet("Add")]
+       [HttpPost("Add")]
 
         public IActionResult Add(Customer customer)
         {
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Update")]
+        [HttpPost("Update")]
 
         public IActionResult Update(Customer customer)
         {
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Delete")]
+        [HttpPost("Delete")]
 
         public IActionResult Delete(Customer customer)
         {

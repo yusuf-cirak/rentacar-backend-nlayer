@@ -27,10 +27,12 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context= new TContext())
             {
-                var deletedEntity = context.Entry(context);
-                deletedEntity.State = EntityState.Deleted;
+                //var deletedEntity = context.Entry(entity);
+                //deletedEntity.State = EntityState.Deleted;
+                context.Set<TEntity>().Remove(entity); // Farklı bir kullanım şekli. Yukarıdakinin aynısını yapıyor.
+                
                 context.SaveChanges();
-            }
+            };
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)

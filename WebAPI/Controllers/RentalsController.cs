@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
             _rentalService = rentalService;
         }
 
-        [HttpGet("Add")]
+        [HttpPost("Add")]
 
         public IActionResult Add(Rentals rent)
         {
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Update")]
+        [HttpPost("Update")]
 
         public IActionResult Update(Rentals rent)
         {
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("Delete")]
+        [HttpPost("Delete")]
 
         public IActionResult Delete(Rentals rent)
         {
@@ -75,6 +75,18 @@ namespace WebAPI.Controllers
         public IActionResult GetByBrandName(int brandName)
         {
             var result = _rentalService.GetByBrandName(brandName);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getrentaldetails")]
+
+        public IActionResult GetRentalDetails()
+        {
+            var result = _rentalService.GetRentalDetails();
             if (result.Success)
             {
                 return Ok(result);

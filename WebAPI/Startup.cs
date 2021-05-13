@@ -60,6 +60,9 @@ namespace WebAPI
             //services.AddSingleton<IUserService, UserManager>();
             //services.AddSingleton<IUserDal, EfUserDal>();
             // services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();  (15. günde silindi ve CoreModule'a taþýndý.)
+
+            services.AddDbContext<CarDbContext>();
+
             services.AddCors();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -97,17 +100,19 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200/").AllowAnyOrigin());
+            app.ConfigureCustomExceptionMiddleware(); //
 
-            app.UseStaticFiles(); // Resim görüntülemek için
+            app.UseCors(builder => builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()); // Client'ten gelen izinlere karþý verilmesi.
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection(); // Client'ten gelen izinlere karþý verilmesi.
 
             app.UseRouting();
-    
+
             app.UseAuthentication(); // Bir sisteme önce giriþ yapýlýr.
 
             app.UseAuthorization();  // Sonra ise yetkiler kullanýlýr. Sýralama önemlidir.
+
+            app.UseStaticFiles(); // Resim görüntülemek için
 
             app.UseEndpoints(endpoints =>
             {

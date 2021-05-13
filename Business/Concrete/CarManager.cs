@@ -28,7 +28,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("car.add.auth")]
+        [SecuredOperation("car.add.auth,admin")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("cars.getall")]// Yeni ürün eklendiğinde cache siliniyor yani önceden getall işlemini cache'den yaparken
         // yeni bir ürün eklemesi yapıldıktan sonra getall işleminin bile tekrardan cache'ye eklenmesi gerekir.

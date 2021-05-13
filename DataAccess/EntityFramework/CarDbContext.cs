@@ -28,6 +28,9 @@ namespace DataAccess.EntityFramework
         }
 
 
+        //buraya girmesi gerek ama girmiyor? benim gördüğğm buraya giriyor ama delete entity kısmında olmuyor işte
+        // isterseniz bir de ekleme deneyin? belki farklı bişey olur
+
         
     }
 }
