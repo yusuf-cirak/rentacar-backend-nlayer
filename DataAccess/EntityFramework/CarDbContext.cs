@@ -26,11 +26,6 @@ namespace DataAccess.EntityFramework
             optionsBuilder.UseSqlServer(
             @"Server=(localdb)\mssqllocaldb;Database=DatabaseForHomework;Trusted_Connection=True");
         }
-
-
-        //buraya girmesi gerek ama girmiyor? benim gördüğğm buraya giriyor ama delete entity kısmında olmuyor işte
-        // isterseniz bir de ekleme deneyin? belki farklı bişey olur
-
         
     }
 }
